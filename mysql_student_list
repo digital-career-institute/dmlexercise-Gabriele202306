@@ -1,0 +1,103 @@
+mysql> Create Table students (
+    -> studentid INT PRIMARY KEY AUTO_INCREMENT,
+    -> name VARCHAR(50),
+    -> age INT,
+    -> grade FLOAT
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> SELECT * FROM students;
+Empty set (0.01 sec)
+
+mysql> ALTER TABLE students ADD COLUMN address VARCHAR(100);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO students(studentid, name, age, grade, address) VALUES
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> INSERT INTO students(name, age, grade, address) VALUES
+    -> ('Janne', 18, 7.8, 'Jablonskistrasse 27'),
+    -> ('Jonas', 19, 6.5, 'Jonasstrasse 1'),
+    -> ('Jens', 19, 8.9, 'Jensstrasse 2'),
+    -> ('Jenna', 20, 9.5, 'Jennastrasse 4');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM students;
++-----------+-------+------+-------+---------------------+
+| studentid | name  | age  | grade | address             |
++-----------+-------+------+-------+---------------------+
+|         1 | Janne |   18 |   7.8 | Jablonskistrasse 27 |
+|         2 | Jonas |   19 |   6.5 | Jonasstrasse 1      |
+|         3 | Jens  |   19 |   8.9 | Jensstrasse 2       |
+|         4 | Jenna |   20 |   9.5 | Jennastrasse 4      |
++-----------+-------+------+-------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> UPDATE students SET grade = 9.5 WHERE name = 'Jens';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM students;
++-----------+-------+------+-------+---------------------+
+| studentid | name  | age  | grade | address             |
++-----------+-------+------+-------+---------------------+
+|         1 | Janne |   18 |   7.8 | Jablonskistrasse 27 |
+|         2 | Jonas |   19 |   6.5 | Jonasstrasse 1      |
+|         3 | Jens  |   19 |   9.5 | Jensstrasse 2       |
+|         4 | Jenna |   20 |   9.5 | Jennastrasse 4      |
++-----------+-------+------+-------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> DELETE FROM students WHERE studentid = 3;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM students;
++-----------+-------+------+-------+---------------------+
+| studentid | name  | age  | grade | address             |
++-----------+-------+------+-------+---------------------+
+|         1 | Janne |   18 |   7.8 | Jablonskistrasse 27 |
+|         2 | Jonas |   19 |   6.5 | Jonasstrasse 1      |
+|         4 | Jenna |   20 |   9.5 | Jennastrasse 4      |
++-----------+-------+------+-------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT name, age FROM students;
++-------+------+
+| name  | age  |
++-------+------+
+| Janne |   18 |
+| Jonas |   19 |
+| Jenna |   20 |
++-------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT name, grade FROM students WHERE > 80;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> 80' at line 1
+mysql> SELECT name, grade FROM students WHERE > '8.0';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> '8.0'' at line 1
+mysql> SELECT name, grade FROM students WHERE > 8.0;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> 8.0' at line 1
+mysql> SELECT name, grade FROM students WHERE grade > 8.0;
++-------+-------+
+| name  | grade |
++-------+-------+
+| Jenna |   9.5 |
++-------+-------+
+1 row in set (0.01 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
